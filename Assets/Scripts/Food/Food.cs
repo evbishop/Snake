@@ -10,17 +10,23 @@ public class Food : NetworkBehaviour
 
     public static event Action ServerOnFoodEaten;
 
-    [ServerCallback]
     void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
         FindObjectOfType<Snake>().AddTail();
-        GameObject boom = Instantiate
-            (particlePrefab, transform.position, particlePrefab.transform.rotation);
-        NetworkServer.Spawn(boom);
-        StartCoroutine(DelayedDestroy(boom, 3f));
+        ServerParticles();
+
         NetworkServer.Destroy(gameObject);
         ServerOnFoodEaten?.Invoke();
+    }
+
+    [ServerCallback]
+    void ServerParticles()
+    {
+        GameObject boom = Instantiate
+                    (particlePrefab, transform.position, particlePrefab.transform.rotation);
+        NetworkServer.Spawn(boom);
+        StartCoroutine(DelayedDestroy(boom, 3f));
     }
 
     IEnumerator DelayedDestroy(GameObject obj, float delay)
