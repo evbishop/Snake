@@ -8,16 +8,15 @@ public class Food : NetworkBehaviour
 {
     [SerializeField] GameObject particlePrefab;
 
-    public static event Action ServerOnFoodEaten;
+    public static event Action<GameObject> ServerOnFoodEaten;
 
     void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
-        FindObjectOfType<Snake>().AddTail();
         ServerParticles();
 
         NetworkServer.Destroy(gameObject);
-        ServerOnFoodEaten?.Invoke();
+        ServerOnFoodEaten?.Invoke(other.gameObject);
     }
 
     [ServerCallback]
