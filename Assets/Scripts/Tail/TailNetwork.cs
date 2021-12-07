@@ -3,24 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class Tail : NetworkBehaviour
+public class TailNetwork : NetworkBehaviour
 {
     [SyncVar]
-    GameObject target;
-
-    [SyncVar]
     Snake owner;
-
-    public GameObject Target
-    {
-        get { return target; }
-        private set { target = value; }
-    }
-
     public Snake Owner
     {
         get { return owner; }
         private set { owner = value; }
+    }
+
+    [SyncVar]
+    GameObject target;
+    public GameObject Target
+    {
+        get { return target; }
+        private set { target = value; }
     }
 
     public override void OnStartServer()
@@ -28,5 +26,6 @@ public class Tail : NetworkBehaviour
         Owner = connectionToClient.identity.GetComponent<Snake>();
         var tails = Owner.GetComponent<TailSpawner>().Tails;
         Target = tails.Count == 0 ? Owner.gameObject : tails[tails.Count - 1];
+        tails.Add(gameObject);
     }
 }
