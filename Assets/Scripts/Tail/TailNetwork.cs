@@ -6,8 +6,8 @@ using Mirror;
 public class TailNetwork : NetworkBehaviour
 {
     [SyncVar]
-    Snake owner;
-    public Snake Owner
+    SnakeMovement owner;
+    public SnakeMovement Owner
     {
         get { return owner; }
         private set { owner = value; }
@@ -23,7 +23,7 @@ public class TailNetwork : NetworkBehaviour
 
     public override void OnStartServer()
     {
-        Owner = connectionToClient.identity.GetComponent<Snake>();
+        Owner = connectionToClient.identity.GetComponent<SnakeMovement>();
         var tails = Owner.GetComponent<TailSpawner>().Tails;
         Target = tails.Count == 0 ? Owner.gameObject : tails[tails.Count - 1];
         tails.Add(gameObject);

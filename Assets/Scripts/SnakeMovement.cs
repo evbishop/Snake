@@ -1,18 +1,16 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
 using Mirror;
-using System;
+using UnityEngine;
 
-public class Snake : NetworkBehaviour
+public class SnakeMovement : NetworkBehaviour
 {
     [SerializeField] float rotationSpeed = 180f, speedChange = 0.5f;
-    [SerializeField] GameObject tailPrefab;
 
-    [SerializeField] [SyncVar]
+    [SerializeField]
+    [SyncVar]
     float speed = 3f;
-    public float Speed 
+    public float Speed
     {
         get { return speed; }
         private set { speed = value; }
@@ -34,14 +32,10 @@ public class Snake : NetworkBehaviour
             Speed += speedChange;
     }
 
+    [ClientCallback]
     void Update()
     {
         transform.Translate(Vector3.forward * Speed * Time.deltaTime);
         transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime * Input.GetAxis("Horizontal"));
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Border")) SceneManager.LoadScene(0);
     }
 }
