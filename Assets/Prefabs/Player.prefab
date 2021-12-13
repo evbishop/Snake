@@ -586,6 +586,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  tailSpawner: {fileID: -4098113177154784136}
 --- !u!114 &4155077525276077500
 MonoBehaviour:
   m_ObjectHideFlags: 0
