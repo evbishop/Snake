@@ -5,7 +5,13 @@ using UnityEngine;
 
 public class SnakeNetworkManager : NetworkManager
 {
-    [SerializeField] GameObject foodSpawnerPrefab;
+    [SerializeField] GameObject foodSpawnerPrefab, gameOverHandlerPrefab;
+
+    public override void OnStartServer()
+    {
+        var gameOverHandlerInstance = Instantiate(gameOverHandlerPrefab);
+        NetworkServer.Spawn(gameOverHandlerInstance);
+    }
 
     public override void OnServerAddPlayer(NetworkConnection conn)
     {

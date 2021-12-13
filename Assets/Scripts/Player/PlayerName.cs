@@ -11,6 +11,8 @@ public class PlayerName : NetworkBehaviour
     [SyncVar(hook = nameof(HandlePlayerNameUpdated))]
     string playerName;
 
+    public string Name { get { return playerName; } }
+
     void HandlePlayerNameUpdated(string oldText, string newText)
     {
         playerNameText.text = newText;

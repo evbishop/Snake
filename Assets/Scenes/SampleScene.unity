@@ -406,7 +406,9 @@ MonoBehaviour:
   - {fileID: 2564288885050272488, guid: 46c197db3f0ffdb4baf92e18958245e0, type: 3}
   - {fileID: 3189939752094581079, guid: f4562d466179f2b4084db2f787b69b56, type: 3}
   - {fileID: 6868670569204301540, guid: f0756ea880ffc1043bf943aabbd94281, type: 3}
+  - {fileID: 6527986583898236568, guid: ee8a7400de39a6543a79b93e06b1af62, type: 3}
   foodSpawnerPrefab: {fileID: 5713135567233983233, guid: 594f9fe0a5f89a2499245f8649c19167, type: 3}
+  gameOverHandlerPrefab: {fileID: 6527986583898236568, guid: ee8a7400de39a6543a79b93e06b1af62, type: 3}
 --- !u!4 &599288979
 Transform:
   m_ObjectHideFlags: 0

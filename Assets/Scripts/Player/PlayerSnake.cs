@@ -7,12 +7,13 @@ using System;
 public class PlayerSnake : NetworkBehaviour
 {
     [SerializeField] TailSpawner tailSpawner;
-    public static event Action<PlayerSnake> ServerOnPlayerSpawned;
-    public static event Action<PlayerSnake> ServerOnPlayerDespawned;
+    [SerializeField] PlayerName playerName;
+    public static event Action<PlayerName> ServerOnPlayerSpawned;
+    public static event Action<PlayerName> ServerOnPlayerDespawned;
 
     public override void OnStartServer()
     {
-        ServerOnPlayerSpawned?.Invoke(this);
+        ServerOnPlayerSpawned?.Invoke(playerName);
     }
 
     [ServerCallback]
@@ -33,7 +34,7 @@ public class PlayerSnake : NetworkBehaviour
 
     void DestroySelf()
     {
-        ServerOnPlayerDespawned?.Invoke(this);
+        ServerOnPlayerDespawned?.Invoke(playerName);
         foreach (var tail in tailSpawner.Tails)
             NetworkServer.Destroy(tail);
         NetworkServer.Destroy(gameObject);

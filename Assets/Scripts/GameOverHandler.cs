@@ -5,7 +5,7 @@ using Mirror;
 
 public class GameOverHandler : NetworkBehaviour
 {
-    List<PlayerSnake> players = new List<PlayerSnake>();
+    List<PlayerName> players = new List<PlayerName>();
 
     public override void OnStartServer()
     {
@@ -19,14 +19,15 @@ public class GameOverHandler : NetworkBehaviour
         PlayerSnake.ServerOnPlayerDespawned -= ServerHandlePlayerDespawned;
     }
 
-    void ServerHandlePlayerSpawned(PlayerSnake player)
+    void ServerHandlePlayerSpawned(PlayerName player)
     {
         players.Add(player);
     }
 
-    void ServerHandlePlayerDespawned(PlayerSnake player)
+    void ServerHandlePlayerDespawned(PlayerName player)
     {
         players.Remove(player);
         if (players.Count != 1) return;
+        print(players[0].Name);
     }
 }
