@@ -28,6 +28,12 @@ public class GameOverHandler : NetworkBehaviour
     {
         players.Remove(player);
         if (players.Count != 1) return;
-        print(players[0].Name);
+        RpcGameOver(players[0].Name);
+    }
+
+    [ClientRpc]
+    void RpcGameOver(string winner)
+    {
+        print(winner);
     }
 }
