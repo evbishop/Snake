@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using System;
 
 public class GameOverHandler : NetworkBehaviour
 {
+    public static event Action<string> ClientOnGameOver;
     List<PlayerName> players = new List<PlayerName>();
 
     public override void OnStartServer()
@@ -34,6 +36,6 @@ public class GameOverHandler : NetworkBehaviour
     [ClientRpc]
     void RpcGameOver(string winner)
     {
-        print(winner);
+        ClientOnGameOver?.Invoke(winner);
     }
 }
