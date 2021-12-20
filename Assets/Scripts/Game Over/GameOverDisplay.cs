@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Mirror;
 
 public class GameOverDisplay : MonoBehaviour
 {
@@ -22,5 +23,13 @@ public class GameOverDisplay : MonoBehaviour
     {
         canvas.SetActive(true);
         winnerNameText.text = $"{winner} победил!";
+    }
+
+    public void RestartGame()
+    {
+        if (NetworkServer.active && NetworkClient.isConnected)
+            NetworkManager.singleton.StopHost();
+        else NetworkManager.singleton.StopClient();
+        canvas.SetActive(false);
     }
 }
