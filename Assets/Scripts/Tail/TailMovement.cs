@@ -10,7 +10,7 @@ public class TailMovement : MonoBehaviour
 
     void Update()
     {
-        agent.speed = tail.Owner.Speed + 0.5f;
+        agent.speed = tail.Owner.Speed;
         agent.SetDestination(tail.Target.transform.position);
     }
 }
